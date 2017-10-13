@@ -69,7 +69,7 @@ steps_data= filtered.data %>% group_by(date) %>% summarize(total_steps = sum(ste
 * If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day
 
 ```{r}
-hist(steps_data$total_steps,col="green", ylim=c(0,20),breaks=seq(0,25000,by=2500))
+hist(steps_data$total_steps,col="green",xlab = "total steps",main="Histogram of total number of steps taken each day", ylim=c(0,20),breaks=seq(0,25000,by=2500))
 ```
 
 The mean total number of steps taken per day :
@@ -91,7 +91,7 @@ median(steps_data$total_steps)
 ```{r}
 interval_step <- tidy_data %>% filter(!is.na(steps)) %>% group_by(interval) %>% summarize(avg_steps = mean(steps))
 
-plot(avg_steps~interval,interval_step,type="l",col="green")
+plot(avg_steps~interval,interval_step,type="l",col="green",main = "Time Series Plot showing Avg Steps over 5 min Interval")
 ```
 
 * Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -126,7 +126,7 @@ imputed_data <- transform(tidy_data, steps = ifelse(is.na(tidy_data$steps),yes=i
 
 ```{r}
 steps_imputed_data = imputed_data %>% group_by(date) %>% summarize(total_steps = sum(steps))
-hist(steps_imputed_data$total_steps,col="blue",ylim=c(0,20),breaks=seq(0,25000,by=2500))
+hist(steps_imputed_data$total_steps,col="blue",ylim=c(0,20),breaks=seq(0,25000,by=2500),xlab= "Total Steps",main = "Histogram of total number of steps each day(imputed data)")
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -147,6 +147,6 @@ imputed_data$weekdays <- as.factor(imputed_data$weekdays)
 ```{r}
 weekdays_data <- imputed_data %>% group_by(interval,weekdays) %>% summarize(avg_steps = mean(steps))
 
-ggplot(weekdays_data,aes(x=interval,y=avg_steps,col=weekdays))+geom_line() + facet_wrap(~weekdays)+ labs(title="Average step by interval per day type", x = "Interval", y = "Steps")
+ggplot(weekdays_data,aes(x=interval,y=avg_steps,col=weekdays))+geom_line() + facet_wrap(~weekdays)+ labs(title="Average step by interval per day type", xlab = "Interval", ylab = "Steps")
 
 ```
