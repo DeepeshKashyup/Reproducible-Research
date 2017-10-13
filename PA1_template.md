@@ -1,11 +1,6 @@
----
-title: "Reproducible Research Course Project 1"
-author: "Deepesh Kumar"
-date: "October 12, 2017"
-output:
-  pdf_document: default
-  html_document: default
----
+# Reproducible Research Course Project 1
+Deepesh Kumar  
+October 12, 2017  
 
 
 
@@ -74,7 +69,7 @@ steps_data= filtered.data %>% group_by(date) %>% summarize(total_steps = sum(ste
 hist(steps_data$total_steps,col="green",xlab = "total steps",main="Histogram of total number of steps taken each day", ylim=c(0,20),breaks=seq(0,25000,by=2500))
 ```
 
-![](project1_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+![](project1_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 The mean total number of steps taken per day :
 
@@ -109,7 +104,7 @@ interval_step <- tidy_data %>% filter(!is.na(steps)) %>% group_by(interval) %>% 
 plot(avg_steps~interval,interval_step,type="l",col="green",main = "Time Series Plot showing Avg Steps over 5 min Interval")
 ```
 
-![](project1_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+![](project1_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 * Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -159,7 +154,7 @@ steps_imputed_data = imputed_data %>% group_by(date) %>% summarize(total_steps =
 hist(steps_imputed_data$total_steps,col="blue",ylim=c(0,20),breaks=seq(0,25000,by=2500),xlab= "Total Steps",main = "Histogram of total number of steps each day(imputed data)")
 ```
 
-![](project1_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
+![](project1_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 ## Are there differences in activity patterns between weekdays and weekends?
 For this part the **weekdays()** function may be of some help here. Use the dataset with the filled-in missing values for this part.
@@ -182,4 +177,4 @@ weekdays_data <- imputed_data %>% group_by(interval,weekdays) %>% summarize(avg_
 ggplot(weekdays_data,aes(x=interval,y=avg_steps,col=weekdays))+geom_line() + facet_wrap(~weekdays)+ labs(title="Average step by interval per day type", xlab = "Interval", ylab = "Steps")
 ```
 
-![](project1_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
+![](project1_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
